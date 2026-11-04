@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111714">
+  <meta name="description" content="Test your MIDI controller in the browser. Inspect notes, velocity, channels, and raw MIDI messages.">
+  <title>MIDI Input Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <main>
+    <header class="topbar"><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">▥</span> MIDI <span>INPUT LAB</span></a><span class="local-badge"><i></i> Runs in your browser</span></header>
+    <section class="intro">
+      <p class="eyebrow">YOUR CONTROLLER. EVERY DETAIL.</p>
+      <h1>Make a connection.<br><span>See every note.</span></h1>
+      <p class="lead">A little workspace for your MIDI signals. Connect a controller,<br class="desktop-break"> play a few notes, and see what comes through.</p>
+    </section>
+    <section class="panel connection" aria-labelledby="connection-title">
+      <div><h2 id="connection-title">01 <span>Connect your device</span></h2><p id="status" role="status">Ready when you are. Connect a MIDI device to get started.</p></div>
+      <div class="connection-controls"><label for="inputs">MIDI input</label><select id="inputs" disabled><option>No device connected</option></select><button id="connect" class="primary">Connect MIDI <span aria-hidden="true">→</span></button></div>
+    </section>
+    <section class="metrics" aria-label="Latest MIDI message">
+      <div class="metric"><span>LAST NOTE</span><strong id="last-note">—</strong><small id="note-number">Play a note to begin</small></div>
+      <div class="metric"><span>VELOCITY</span><strong id="velocity">—</strong><div class="meter" aria-hidden="true"><i id="velocity-bar"></i></div></div>
+      <div class="metric"><span>CHANNEL</span><strong id="channel">—</strong><small>1–16 MIDI channels</small></div>
+      <div class="metric"><span>MESSAGES</span><strong id="count">0</strong><small id="source">Waiting for input</small></div>
+    </section>
+    <section class="panel keys-panel" aria-labelledby="keys-title">
+      <div class="section-heading"><h2 id="keys-title">02 <span>The keys</span></h2><span class="subtle">C2 — C6 · middle C = C4</span></div>
+      <div class="keyboard-scroll"><div id="keyboard" aria-label="MIDI note activity from C2 to C6"></div></div>
+      <div class="keyboard-footer"><span><i class="dot"></i> <span id="active-count">0 active notes</span></span><span class="subtle">All 128 MIDI notes are captured in the log</span></div>
+    </section>
+    <section class="panel log-panel" aria-labelledby="log-title">
+      <div class="section-heading"><h2 id="log-title">03 <span>Signal monitor</span></h2><div class="log-controls"><button id="pause" aria-pressed="false">Pause log</button><button id="clear">Clear</button></div></div>
+      <div id="empty" class="empty"><span class="signal-icon" aria-hidden="true">⌁</span><h3>Listening starts with a connection</h3><p>Your MIDI messages will appear here, newest first.</p><button id="demo" class="text-button">No controller? Try a demo <span aria-hidden="true">→</span></button></div>
+      <div id="table-wrap" class="table-wrap" hidden><table><caption class="sr-only">Latest MIDI messages, including device, channel, and raw bytes</caption><thead><tr><th>TIME</th><th>EVENT</th><th>CH</th><th>DETAIL</th><th>DEVICE</th><th>RAW</th></tr></thead><tbody id="messages"></tbody></table></div>
+      <div class="log-footer"><span id="log-state">Live · showing the latest 100 messages</span><span>HEX bytes</span></div>
+    </section>
+    <footer><span>A direct line to your MIDI controller.</span><span>No uploads. No account. Just signals.</span></footer>
+    <p class="help">Use a browser with Web MIDI support, such as Chrome or Edge, and allow MIDI access when prompted. This tool monitors input; it does not produce audio.</p>
+  </main>
+</body>
+</html>
